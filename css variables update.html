@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vujahday+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>
+        CSS Variable update using <span class="js">JS</span>
+    </h1>
+    <div class="pickers">
+        <label for="spacing"><span id = "option">Spacing:</span></label>
+        <input type="range" id="spacing" name="spacing" min="10" max="250" value="10" data-sizing="px"> </input>
+
+        <label for="blur"><span id = "option">Blur:</span></label>
+        <input type="range" id="range" name="blur" min="0" max="25" value="10" data-sizing="px"></input>
+
+        <label for="color"><span id ="option">Color:</span></label>
+        <input type="color" id="color" name="base" value="#ffc600"></input>
+
+
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Royal_enfied_HIMALAYAN.jpg">
+    <style>
+         :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+        
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+        
+        .js {
+            color: var(--base);
+        }
+        
+        h1 {
+            color: blanchedalmond;
+        }
+        
+        body {
+            text-align: center;
+            font-weight: 500;
+            font-size: larger;
+            font-family: 'Vujahday Script', cursive;
+            background: #172f30;
+        }
+        
+        #option {
+            color: blanchedalmond;
+            font-size: 25px;
+        }
+        
+        .pickers {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        
+        input {
+            width: 200px;
+        }
+    </style>
+
+    <script>
+        const pickers = document.querySelectorAll('.pickers input');
+
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+        }
+
+        pickers.forEach(picker => picker.addEventListener('mousemove', handleUpdate));
+        pickers.forEach(picker => picker.addEventListener('change', handleUpdate));
+    </script>
+</body>
+
+</html>
